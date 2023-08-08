@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
+#include "Touch.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +66,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  uint16_t x=0,y=0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -81,22 +82,33 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  uint16_t tx,ty;
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI1_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
   LCD_Init();
-  Show_Str(0,16,RED,BLACK,(u8 *)"JLML",16,0);
-  Show_Str(0,32,RED,BLACK,(u8 *)"ау",16,0);
+  Show_Str(0,16,RED,BLACK,(uint8_t *)"JLML",16,0);
+  Show_Str(0,32,RED,BLACK,(uint8_t *)"АЁ",16,0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    tx=x;ty=y;
+    ILI9341_TouchGetCoordinates(&x,&y);
+    gui_circle(x,y,WHITE,10,1);
+    LCD_ShowNum(0,0,x,3,16);
+    LCD_ShowNum(0,16,y,3,16);
+    if (tx==x&&ty==y)
+    {
+      gui_circle(x,y,BLACK,10,1);
+    }
+    HAL_Delay(200);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

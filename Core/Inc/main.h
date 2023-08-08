@@ -65,6 +65,10 @@ void Error_Handler(void);
 #define LCD_LED_GPIO_Port GPIOB
 #define LCD_DC_Pin GPIO_PIN_11
 #define LCD_DC_GPIO_Port GPIOB
+#define TOUCH_CS_Pin GPIO_PIN_12
+#define TOUCH_CS_GPIO_Port GPIOB
+#define TOUCH_IRQ_Pin GPIO_PIN_8
+#define TOUCH_IRQ_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
